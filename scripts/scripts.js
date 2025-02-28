@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const regPassword = document.querySelector("#register-password");
   const singUpBtn = document.querySelector("#register-button");
   const requiredBar = document.querySelector("#required-bar");
-  const body = document.querySelector("body");
 
   // Получаем список пользователей из localStorage или создаем пустой массив
   const users = localStorage.getItem("users")
@@ -32,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Email must contain the @ sign and a minimum of 7 characters"; // Сообщение об ошибке
         return false;
       }
-      if (!/^\+[0-9]{8,12}$/.test(regPhone.value)) {
+      if (!/^\+\d{8,12}$/.test(regPhone.value)) {
         requiredBar.innerText =
           "Phone number must start with +, have only numbers, minimum 8 characters, maximum 12 characters"; // Сообщение об ошибке
         return false;
