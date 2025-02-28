@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Register form
 
-  // Получаем элементы формы регистрации
+  // Get registration form elements
   const regName = document.querySelector("#register-name");
   const regEmail = document.querySelector("#register-email");
   const regPhone = document.querySelector("#register-phone");
@@ -9,63 +9,63 @@ document.addEventListener("DOMContentLoaded", () => {
   const singUpBtn = document.querySelector("#register-button");
   const requiredBar = document.querySelector("#required-bar");
 
-  // Получаем список пользователей из localStorage или создаем пустой массив
+  // Get the list of users from localStorage or create an empty array
   const users = localStorage.getItem("users")
     ? JSON.parse(localStorage.getItem("users"))
     : [];
 
-  // Обработчик события для кнопки регистрации
+  // Event handler for the registration button
   singUpBtn.addEventListener("click", (event) => {
-    event.preventDefault(); // Предотвращаем отправку формы
-    requiredBar.classList.remove("hidden"); // Делаем элемент видимым
+    event.preventDefault(); // Prevent form submission
+    requiredBar.classList.remove("hidden"); // Make the element visible
 
-    // Валидация введенных данных
+    // Validate input data
     function validateImputs() {
       if (!/^[a-zA-Z]{2,24}$/.test(regName.value)) {
         requiredBar.innerText =
-          "Name must contain only Latin letters, minimum 2 characters, maximum 24 characters"; // Сообщение об ошибке
+          "Name must contain only Latin letters, minimum 2 characters, maximum 24 characters"; // Error message
         return false;
       }
       if (!/^.{7,}@/.test(regEmail.value)) {
         requiredBar.innerText =
-          "Email must contain the @ sign and a minimum of 7 characters"; // Сообщение об ошибке
+          "Email must contain the @ sign and a minimum of 7 characters"; // Error message
         return false;
       }
       if (!/^\+\d{8,12}$/.test(regPhone.value)) {
         requiredBar.innerText =
-          "Phone number must start with +, have only numbers, minimum 8 characters, maximum 12 characters"; // Сообщение об ошибке
+          "Phone number must start with +, have only numbers, minimum 8 characters, maximum 12 characters"; // Error message
         return false;
       }
       if (!/^.{5,26}[a-zA-Z]$/.test(regPassword.value)) {
         requiredBar.innerText =
-          "Password must contain only Latin letters, minimum 5 characters, maximum 26 characters"; // Сообщение об ошибке
+          "Password must contain only Latin letters, minimum 5 characters, maximum 26 characters"; // Error message
         return false;
       }
       return true;
     }
 
-    // Проверяем, заполнены ли все поля
+    // Check if all fields are filled
     if (
       regName.value === "" ||
       regEmail.value === "" ||
       regPhone.value === "" ||
       regPassword.value === ""
     ) {
-      requiredBar.innerText = "All fields are required"; // Сообщение об ошибке
+      requiredBar.innerText = "All fields are required"; // Error message
       requiredBar.style.color = "red";
     } else {
       let isError = false;
-      // Проверяем, существует ли уже пользователь с таким email
+      // Check if a user with this email already exists
       for (let i = 0; i < users.length; i++) {
         if (users[i].email === regEmail.value) {
-          requiredBar.innerText = "Email already exists"; // Сообщение об ошибке
+          requiredBar.innerText = "Email already exists"; // Error message
           requiredBar.style.color = "red";
           isError = true;
-          break; // Выход из цикла при нахождении совпадения
+          break; // Exit the loop when a match is found
         }
       }
       if (!isError && validateImputs()) {
-        // Создаем нового пользователя и добавляем его в массив
+        // Create a new user and add them to the array
         const user = {
           name: regName.value,
           email: regEmail.value,
@@ -73,14 +73,14 @@ document.addEventListener("DOMContentLoaded", () => {
           password: regPassword.value,
         };
         users.push(user);
-        localStorage.setItem("users", JSON.stringify(users)); // Сохраняем обновленный массив в localStorage
+        localStorage.setItem("users", JSON.stringify(users)); // Save the updated array to localStorage
 
-        // Очищаем поля формы
+        // Clear form fields
         regName.value = "";
         regEmail.value = "";
         regPhone.value = "";
         regPassword.value = "";
-        requiredBar.innerText = "User registered successfully"; // Сообщение об успешной регистрации
+        requiredBar.innerText = "User registered successfully"; // Success message
         requiredBar.style.color = "green";
       } else {
         requiredBar.style.color = "red";
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Login form
 
-  // Получаем элементы формы входа
+  // Get login form elements
   const logEmail = document.querySelector("#login-email");
   const logPassword = document.querySelector("#login-password");
   const logInBtn = document.querySelector("#login-button");
@@ -99,13 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutSection = document.querySelector(".logout");
   const logoutBtn = document.querySelector("#logout-button");
 
-  // Обработчик события для кнопки входа
+  // Event handler for the login button
   logInBtn.addEventListener("click", (event) => {
-    event.preventDefault(); // Предотвращаем отправку формы
-    loginBar.classList.remove("hidden"); // Делаем элемент видимым
+    event.preventDefault(); // Prevent form submission
+    loginBar.classList.remove("hidden"); // Make the element visible
     let isError = true;
 
-    // Проверяем, существует ли пользователь с введенными email и паролем
+    // Check if a user with the entered email and password exists
     for (let i = 0; i < users.length; i++) {
       if (
         users[i].email === logEmail.value &&
@@ -117,29 +117,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (isError) {
-      // Проверяем, заполнены ли все поля
+      // Check if all fields are filled
       if (logEmail.value === "" || logPassword.value === "") {
-        loginBar.innerText = "All fields are required"; // Сообщение об ошибке
+        loginBar.innerText = "All fields are required"; // Error message
         loginBar.style.color = "red";
       } else {
-        loginBar.innerText = "Invalid email or password"; // Сообщение об ошибке
+        loginBar.innerText = "Invalid email or password"; // Error message
         loginBar.style.color = "red";
       }
     } else {
-      // Очищаем поля формы
+      // Clear form fields
       logEmail.value = "";
       logPassword.value = "";
-      loginBar.innerText = "Login successful"; // Сообщение об успешном входе
+      loginBar.innerText = "Login successful"; // Success message
       loginBar.style.color = "green";
 
-      // Показываем блок выхода
+      // Show the logout section
       logoutSection.classList.remove("hidden");
     }
   });
 
-  // Обработчик события для кнопки выхода
+  // Event handler for the logout button
   logoutBtn.addEventListener("click", () => {
-    // Перезагружаем страницу для выхода
+    // Reload the page to log out
     location.reload();
   });
 });
