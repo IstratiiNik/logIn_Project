@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogIn</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <!-- Register -->
+    <section class="register">
+      <form class="register-container">
+        <div class="inputs">
+          <div>
+            <label for="name">Name</label>
+            <input class="name" id="register-name" type="text" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input class="email" id="register-email" type="email" />
+          </div>
+          <div>
+            <label for="phone">Telefon</label>
+            <input class="phone" id="register-phone" type="number" />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input class="password" id="register-password" type="password" />
+          </div>
+        </div>
+        <button class="register-button" id="register-button" type="submit">
+          Register
+        </button>
+        <p id="required-bar" class="hidden"></p>
+      </form>
+    </section>
+
+    <!-- Login -->
+    <section class="login">
+      <form class="login-container">
+        <div class="inputs">
+          <div>
+            <label for="login-email">Email</label>
+            <input class="login-email" id="login-email" type="email" />
+          </div>
+          <div>
+            <label for="login-password">Password</label>
+            <input class="login-password" id="login-password" type="password" />
+          </div>
+        </div>
+        <button class="login-button" id="login-button" type="submit">Login</button>
+        <p id="login-bar" class="hidden"></p>
+      </form>
+    </section>
+
+    <!-- Logout -->
+    <section class="logout hidden">
+      <button id="logout-button">Logout</button>
+    </section>
+  </body>
+  <script src="scripts/scripts.js"></script>
+</html>
